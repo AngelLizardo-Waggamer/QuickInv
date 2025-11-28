@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class AdminBD extends SQLiteOpenHelper {
 
     // Configuraciones iniciales
-    private static final String DB_NOMBRE = "QuickInvAlphaOne.db";
+    private static final String DB_NOMBRE = "QuickInv.db";
     private static final int DB_VERSION = 1;
 
     /**
