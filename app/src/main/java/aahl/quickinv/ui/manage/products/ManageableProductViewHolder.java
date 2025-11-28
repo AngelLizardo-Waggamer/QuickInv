@@ -24,15 +24,15 @@ public class ManageableProductViewHolder extends RecyclerView.ViewHolder{
 
 
         if (listener != null) {
-            int position = getBindingAdapterPosition();
-
             btnEditProd.setOnClickListener(v -> {
+                int position = getBindingAdapterPosition();
                 if (position != RecyclerView.NO_POSITION){
                     listener.onEditProductClicked(position);
                 }
             });
 
             btnDeleteProd.setOnClickListener(v -> {
+                int position = getBindingAdapterPosition();
                 if (position != RecyclerView.NO_POSITION){
                     listener.onDeleteProductClicked(position);
                 }
