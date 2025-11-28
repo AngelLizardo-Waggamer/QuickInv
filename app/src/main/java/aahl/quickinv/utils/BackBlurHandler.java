@@ -1,4 +1,4 @@
-package aahl.quickinv.ui.home;
+package aahl.quickinv.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import aahl.quickinv.R;
 import aahl.quickinv.databinding.FragmentHomeBinding;
+import aahl.quickinv.utils.BackBlurHandler;
 
 public class HomeFragment extends Fragment {
 
