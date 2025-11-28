@@ -1,6 +1,8 @@
 package aahl.quickinv.ui.visualize;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,7 @@ public class VisualizeFragment extends Fragment {
     private ProductAdapter adapter;
     private List<Inventory> inventories = new ArrayList<>();
     private List<Product> products = new ArrayList<>();
+    private List<Product> allProducts = new ArrayList<>(); // Lista completa sin filtrar
 
     private DBOps dbOps;
     private boolean isAnyInventoryAvailable = false;
@@ -85,6 +88,24 @@ public class VisualizeFragment extends Fragment {
         adapter = new ProductAdapter(products);
         adapter.setListener(this::navegarAEditarProducto);
         recyclerView.setAdapter(adapter);
+
+        // Configurar el TextWatcher para la búsqueda en tiempo real
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No se necesita implementación
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // No se necesita implementación
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filtrarProductos(s.toString());
+            }
+        });
     }
 
     // Agrega margin al recyclerview (Que ya debe de estar asignado) para que no se dibuje detrás de la barra
@@ -150,9 +171,20 @@ public class VisualizeFragment extends Fragment {
         Inventory selectedInventory = inventories.get(position);
 
         // Obtener todos los productos de un inventario
-        // Usar clear() y addAll() para mantener la referencia de la lista
-        products.clear();
-        products.addAll(dbOps.getProductsByInventory(selectedInventory.getId()));
+        // Actualizar la lista completa (sin filtrar)
+        allProducts.clear();
+        allProducts.addAll(dbOps.getProductsByInventory(selectedInventory.getId()));
+
+        // Aplicar el filtro actual (si existe texto en la búsqueda)
+        String currentQuery = etSearch.getText().toString();
+        if (currentQuery.isEmpty()) {
+            // Si no hay búsqueda, mostrar todos los productos
+            products.clear();
+            products.addAll(allProducts);
+        } else {
+            // Si hay búsqueda activa, re-aplicar el filtro
+            filtrarProductos(currentQuery);
+        }
 
         // Lógica para notificar al recyclerView que el dataset de productos cambió
         adapter.notifyDataSetChanged();
@@ -180,6 +212,35 @@ public class VisualizeFragment extends Fragment {
         // Navegar a la pantalla de edición
         Navigation.findNavController(requireView())
                 .navigate(R.id.action_visualize_to_add_edit_product, bundle);
+    }
+
+    /**
+     * Filtra la lista de productos basándose en el texto de búsqueda.
+     * La búsqueda es case-insensitive y busca coincidencias parciales en el nombre del producto.
+     *
+     * @param query Texto de búsqueda ingresado por el usuario
+     */
+    private void filtrarProductos(String query) {
+        // Limpiar la lista de productos
+        products.clear();
+
+        // Si el query está vacío, mostrar todos los productos
+        if (query == null || query.trim().isEmpty()) {
+            products.addAll(allProducts);
+        } else {
+            // Convertir el query a minúsculas para búsqueda case-insensitive
+            String queryLowerCase = query.toLowerCase().trim();
+
+            // Filtrar productos que contengan el query en su nombre
+            for (Product product : allProducts) {
+                if (product.getName().toLowerCase().contains(queryLowerCase)) {
+                    products.add(product);
+                }
+            }
+        }
+
+        // Notificar al adapter que los datos han cambiado
+        adapter.notifyDataSetChanged();
     }
 
     private void obtenerInventarios() {
