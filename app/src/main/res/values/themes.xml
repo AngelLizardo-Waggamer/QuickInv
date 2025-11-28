@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.SideBar.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryVariant">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_button</item>
+
+        <!-- Compatibilidad con AppCompat -->
+        <item name="colorPrimaryDark">@color/brand_primary</item>
+        <item name="colorAccent">@color/brand_accent</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/brand_accent</item>
+        <item name="colorSecondaryVariant">@color/brand_accent</item>
+        <item name="colorOnSecondary">@color/text_primary</item> <!-- Texto oscuro sobre fondo amarillo para buen contraste -->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <!-- Color de fondo de las pantallas por defecto -->
+        <item name="android:windowBackground">@color/background_screen</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.SideBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.SideBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
