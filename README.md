@@ -1,8 +1,9 @@
-# Aplicación con BD
-El objetivo de esta aplicación fue principalmente el implementar la lógica necesaria para crear una 
-base de datos y usarla en código nativo de Java. Sin embargo, esta aplicación no solamente está 
-orientada para cumplir con este objetivo, sino que también es una alpha de lo que vendrá siendo el
-proyecto final de la materia: QuickInv.
+# QuickInv
+QuickInv es una aplicación nativa en Android diseñada para facilitar el manejo de inventarios físicos
+desde un teléfono celular con funciones como la de auditar el stock, visualizar los elementos de 
+los inventarios con resaltado cuando no hay stock, y la capacidad de poder mantener varios inventarios
+en la misma aplicación.
 
-Cuando realice el proyecto final, en su README vendrá la descripción de la aplicación como tal
-con todas sus funcionalidades y su explicación en general.
+Esta aplicación es una continuación de la aplicación presentada en la [Actividad 11](https://github.com/AngelLizardo-Waggamer/Act11-DevAndroid).
+Sin embargo, también se aconseja que se vea el portafolio completo de aplicaciones realizadas para la
+materia de Desarrollo de Aplicaciones en el Sistema Android [aquí](https://github.com/AngelLizardo-Waggamer/PortafolioDevAndroid).
