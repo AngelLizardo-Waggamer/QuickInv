@@ -22,8 +22,11 @@ import aahl.quickinv.data.DBOps;
 import aahl.quickinv.models.Product;
 import aahl.quickinv.ui.manage.products.ManageableProductAdapter;
 import aahl.quickinv.ui.manage.products.onProductItemClicked;
+import aahl.quickinv.utils.EdgeToEdgeHelper;
 
 public class ProductModify extends Fragment {
+
+    private final int MARGIN_EXTRA_BOTTOM_RECYCLERVIEW = 20;
 
     private RecyclerView recyclerView;
     private ManageableProductAdapter adapter;
@@ -41,6 +44,9 @@ public class ProductModify extends Fragment {
 
         // Configurar el recyclerView
         configurarRecycler(view);
+
+        // Configurar edge-to-edge
+        configurarEdgeToEdge(view);
 
         // Configurar el FAB
         configurarFAB(view);
@@ -79,6 +85,10 @@ public class ProductModify extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    private void configurarEdgeToEdge(View view) {
+        EdgeToEdgeHelper.applyBottomMargin(view, recyclerView, MARGIN_EXTRA_BOTTOM_RECYCLERVIEW);
     }
 
     private void configurarFAB(View view) {
