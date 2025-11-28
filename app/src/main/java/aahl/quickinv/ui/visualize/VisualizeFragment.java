@@ -29,6 +29,7 @@ import aahl.quickinv.data.DBOps;
 import aahl.quickinv.models.Inventory;
 import aahl.quickinv.models.Product;
 import aahl.quickinv.ui.visualize.recycler.ProductAdapter;
+import aahl.quickinv.utils.EdgeToEdgeHelper;
 
 public class VisualizeFragment extends Fragment {
 
@@ -111,24 +112,7 @@ public class VisualizeFragment extends Fragment {
     // Agrega margin al recyclerview (Que ya debe de estar asignado) para que no se dibuje detrás de la barra
     // de navegación por gestos.
     private void configurarEdgeToEdge(View view) {
-
-        ViewCompat.setOnApplyWindowInsetsListener(view, (v, windowInsets) -> {
-
-            Insets navBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
-
-            ViewGroup.MarginLayoutParams paramsRecycler = (ViewGroup.MarginLayoutParams) recyclerView
-                    .getLayoutParams();
-
-            paramsRecycler.setMargins(
-                    paramsRecycler.leftMargin,
-                    paramsRecycler.topMargin,
-                    paramsRecycler.rightMargin,
-                    navBarInsets.bottom + MARGIN_EXTRA_BOTTOM_RECYCLERVIEW);
-
-            recyclerView.setLayoutParams(paramsRecycler);
-
-            return windowInsets;
-        });
+        EdgeToEdgeHelper.applyBottomMargin(view, recyclerView, MARGIN_EXTRA_BOTTOM_RECYCLERVIEW);
     }
 
     private void configurarSpinner() {

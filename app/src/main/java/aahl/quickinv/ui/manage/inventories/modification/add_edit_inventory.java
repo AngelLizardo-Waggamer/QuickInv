@@ -17,8 +17,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import aahl.quickinv.R;
 import aahl.quickinv.data.DBOps;
 import aahl.quickinv.models.Inventory;
+import aahl.quickinv.utils.EdgeToEdgeHelper;
 
 public class add_edit_inventory extends Fragment {
+
+    private final int MARGIN_EXTRA_BOTTOM_BUTTONS = 20;
 
     private Inventory bundledInventory;
     private boolean isNewInventory = false;
@@ -77,6 +80,11 @@ public class add_edit_inventory extends Fragment {
         if (!isNewInventory) {
             etInventoryName.setText(bundledInventory.getName());
         }
+    }
+
+    private void configurarEdgeToEdge(View view) {
+        View layoutButtons = view.findViewById(R.id.layoutButtons);
+        EdgeToEdgeHelper.applyBottomMargin(view, layoutButtons, MARGIN_EXTRA_BOTTOM_BUTTONS);
     }
 
     private void configurarBotones(View view) {

@@ -29,8 +29,11 @@ import java.util.List;
 import aahl.quickinv.R;
 import aahl.quickinv.data.DBOps;
 import aahl.quickinv.models.Product;
+import aahl.quickinv.utils.EdgeToEdgeHelper;
 
 public class ProductAuditing extends Fragment {
+
+    private final int MARGIN_EXTRA_BOTTOM_RECYCLERVIEW = 20;
 
     private RecyclerView recyclerView;
     private AuditingProductAdapter adapter;
@@ -126,6 +129,10 @@ public class ProductAuditing extends Fragment {
         });
 
         recyclerView.setAdapter(adapter);
+    }
+
+    private void configurarEdgeToEdge(View view) {
+        EdgeToEdgeHelper.applyBottomMargin(view, recyclerView, MARGIN_EXTRA_BOTTOM_RECYCLERVIEW);
     }
 
     private void configurarBotones(View view) {

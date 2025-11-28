@@ -21,8 +21,11 @@ import java.util.List;
 import aahl.quickinv.R;
 import aahl.quickinv.data.DBOps;
 import aahl.quickinv.models.Inventory;
+import aahl.quickinv.utils.EdgeToEdgeHelper;
 
 public class ManageInventories extends Fragment {
+
+    private final int MARGIN_EXTRA_BOTTOM_RECYCLERVIEW = 20;
 
     private List<Inventory> inventoryList = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -83,6 +86,10 @@ public class ManageInventories extends Fragment {
             }
         });
         recyclerView.setAdapter(adapter);
+    }
+
+    private void configurarEdgeToEdge(View view) {
+        EdgeToEdgeHelper.applyBottomMargin(view, recyclerView, MARGIN_EXTRA_BOTTOM_RECYCLERVIEW);
     }
 
     private void borrarInventario(int position) {
